@@ -1,21 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
+import "react-native-gesture-handler";
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from '@react-navigation/native'
+
+import Tabs from './navigation/Tabs'
+
+import { Products, Brands } from "./screens";
+// import OfflineNotice from './helper/offline'
+
+
+
+const Stack = createStackNavigator();
+
+const App = () => {
+    return (
+        <NavigationContainer>
+         {/* <OfflineNotice /> */}
+            <Stack.Navigator
+                screenOptions={{
+                    headerShown: true
+                }}
+                initialRouteName={'Home'}
+            >
+                <Stack.Screen name="Home" component={Tabs} />
+                <Stack.Screen name="Products" component={Products} />
+                <Stack.Screen name="Brands" component={Brands} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
